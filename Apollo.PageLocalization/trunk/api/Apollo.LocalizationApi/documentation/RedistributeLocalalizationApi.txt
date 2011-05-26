@@ -1,0 +1,15 @@
+Redistributing the localization api
+
+If you are a developer of menu solutions for DotNetNuke 3.x / 4.x (including any kind of 
+module or skinobject that is capable of displaying page/tab names, titles and more), 
+you hereby have been granted the right to use the Apollo Localization api in your own 
+project(s). 
+
+If you distribute your solution without source code, you are allowed to redistribute the
+compiled assembly of the api (this is one file: Apollo.LocalizationApi.dll). You are NOT
+allowed to make ANY changes to the api itself, so as to ensure that other modules, that
+might use the api as well, will keep working.
+
+If you distribute your solotion with source code, you are required to also redistribute
+the source of this api, and include all documentation (licence, help file, release notes, 
+this document).

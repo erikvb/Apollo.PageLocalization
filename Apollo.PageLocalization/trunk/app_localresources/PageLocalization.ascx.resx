@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lblTabName.Text" xml:space="preserve">
+    <value>Page Name</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Page Title</value>
+  </data>
+  <data name="Update.Success" xml:space="preserve">
+    <value>The changes were updated successfully</value>
+  </data>
+  <data name="plEditLanguage.Text" xml:space="preserve">
+    <value>Choose language for editing:</value>
+  </data>
+  <data name="plEditLanguage.Help" xml:space="preserve">
+    <value>Each time you choose a different language, all changes will be automatically saved. If no localization value is available, the default page title is loaded.</value>
+  </data>
+  <data name="plSelectParentMenu.Text" xml:space="preserve">
+    <value>Select Parent Menu:</value>
+  </data>
+  <data name="plSelectParentMenu.Help" xml:space="preserve">
+    <value>All pages with child pages are available in this selectbox. If you change the selection,the parent page plus the child pages will become available for localization in the list below.</value>
+  </data>
+  <data name="cmdUpdate.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="cmdUpdate.Tooltip" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="plPage.Text" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="plLocalizedValues.Text" xml:space="preserve">
+    <value>Page Name / Title</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;h1&gt;Page Localization&lt;/h1&gt;
+&lt;p&gt;The Page Localization Module lets you translate the names and titles of the pages 
+in your portal. The translated values are saved in the database, and easy editable. 
+Rendering of the localized page names is being done by multi language enabled skin 
+objects, which are part of this module package. Only after you replaced the default 
+DotNetNuke menu objects (ie. solpartmenu, breadcrumbs, links, pagetitle, treeview) 
+will the localized page names be visible.&lt;/p&gt;
+&lt;p&gt;The following skinobjects are installed during the installation of the 
+module: MLMENU, MLTREEVIEW, MLPAGETITLE, MLLINKS and MLBREADCRUMB. These 
+skinobjects are completely compatible with the corresponding dnn skinobjects, 
+however, some of the skinobjects have extra features. This is a list of all 
+extra and changed attributes of the skinobjects &lt;/p&gt;
+&lt;table border="1" width="500" cellspacing="0" cellpadding="4" style="border-collapse: collapse"&gt;
+	&lt;tr&gt;
+		&lt;td valign="top"&gt;&lt;b&gt;SkinObject&lt;/b&gt;&lt;/td&gt;
+		&lt;td valign="top"&gt;&lt;b&gt;Attribute&lt;/b&gt;&lt;/td&gt;
+		&lt;td valign="top"&gt;&lt;b&gt;Allowed Values&lt;/b&gt;&lt;/td&gt;
+		&lt;td valign="top"&gt;&lt;b&gt;Default Value&lt;/b&gt;&lt;/td&gt;
+		&lt;td valign="top"&gt;&lt;b&gt;Comments&lt;/b&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td valign="top" rowspan="4"&gt;[MLMENU]&lt;p&gt;&amp;nbsp;&lt;/td&gt;
+		&lt;td valign="top"&gt;ParentID&lt;/td&gt;
+		&lt;td valign="top"&gt;Valid integers&lt;/td&gt;
+		&lt;td valign="top"&gt;empty&lt;/td&gt;
+		&lt;td valign="top"&gt;You can set the TabID that has to be used as parent for 
+		the menu directly with this attribute. Just pass a valid TabID, and only 
+		child tabs of that tab will be visible in the menu&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td valign="top"&gt;Level&lt;/td&gt;
+		&lt;td valign="top"&gt;&amp;quot;child&amp;quot;&lt;p&gt;&amp;quot;same&amp;quot;&lt;/p&gt;
+		&lt;p&gt;&amp;quot;levelX&amp;quot; &lt;/td&gt;
+		&lt;td valign="top"&gt;ParentID or Root &lt;/td&gt;
+		&lt;td valign="top"&gt;If you pass a value for Level, it takes precedence over 
+		the passed ParentID.
+		&lt;p&gt;You can pass a specific TabID as parent, if you use this syntax:&lt;br&gt;
+		Level = &amp;quot;levelX&amp;quot;, &lt;br&gt;
+		where X is the level of the tab you wish to use as parent for the menu. 
+		For instance lets assume you have the following tabstructure:&lt;/p&gt;
+		&lt;ul&gt;
+			&lt;li&gt;100&lt;ul&gt;
+				&lt;li&gt;101&lt;ul&gt;
+					&lt;li&gt;111&lt;/li&gt;
+					&lt;li&gt;112&lt;/li&gt;
+					&lt;li&gt;113&lt;/li&gt;
+					&lt;li&gt;114&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;/li&gt;
+				&lt;li&gt;102&lt;ul&gt;
+					&lt;li&gt;121&lt;/li&gt;
+					&lt;li&gt;122&lt;/li&gt;
+					&lt;li&gt;123&lt;/li&gt;
+					&lt;li&gt;124&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;/li&gt;
+				&lt;li&gt;103&lt;ul&gt;
+					&lt;li&gt;131&lt;/li&gt;
+					&lt;li&gt;132&lt;/li&gt;
+					&lt;li&gt;133&lt;/li&gt;
+					&lt;li&gt;134&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;/li&gt;
+				&lt;li&gt;104&lt;ul&gt;
+					&lt;li&gt;141&lt;/li&gt;
+					&lt;li&gt;142&lt;/li&gt;
+					&lt;li&gt;143&lt;/li&gt;
+					&lt;li&gt;144&lt;/li&gt;
+					&lt;li&gt;145&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;/li&gt;
+				&lt;li&gt;105&lt;ul&gt;
+					&lt;li&gt;151&lt;/li&gt;
+					&lt;li&gt;152&lt;/li&gt;
+					&lt;li&gt;153&lt;/li&gt;
+					&lt;li&gt;154&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;/li&gt;
+			&lt;/ul&gt;
+			&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;p&gt;Now, if you pass &amp;quot;level1&amp;quot; to the skinobject, no matter what page you 
+		are on, the menu will always show with an ancestor tab of the current 
+		tab that has level 1 (ie, 101, 102. 103, 104 or 105)&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td valign="top"&gt;ShowAdmin&lt;/td&gt;
+		&lt;td valign="top"&gt;&amp;quot;True&amp;quot;&lt;p&gt;&amp;quot;False&amp;quot;&lt;/td&gt;
+		&lt;td valign="top"&gt;&amp;quot;True&amp;quot;&lt;/td&gt;
+		&lt;td valign="top"&gt;If you set this attribute to &amp;quot;False&amp;quot;, the admin and 
+		host menu's will not be rendered. This is useful if you want to use this 
+		menu in an admin skin, and you don't want the admin menu's to disrupt 
+		your skin&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td valign="top"&gt;OnlyAdmin&lt;/td&gt;
+		&lt;td valign="top"&gt;&amp;quot;True&amp;quot;&lt;p&gt;&amp;quot;False&amp;quot;&lt;/td&gt;
+		&lt;td valign="top"&gt;&amp;quot;False&amp;quot;&lt;/td&gt;
+		&lt;td valign="top"&gt;If you set this attribute to &amp;quot;True&amp;quot;, only the admin and 
+		host menu's will be rendered. This is useful if you want to use this 
+		menu in an admin skin, and you don't want the admin menu's to disrupt 
+		your skin. This attribute will let you put the admin menu's on a 
+		different location of your page&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td valign="top"&gt;[MLPAGETITLE]&lt;/td&gt;
+		&lt;td valign="top"&gt;Visible&lt;/td&gt;
+		&lt;td valign="top"&gt;&amp;quot;True&amp;quot;&lt;p&gt;&amp;quot;False&amp;quot;&lt;/td&gt;
+		&lt;td valign="top"&gt;&amp;quot;False&amp;quot;&lt;/td&gt;
+		&lt;td valign="top"&gt;This skinobject is used to change the page attributes, 
+		like title, description and keywords. As such, it is always necessary to 
+		use this skinobject, in order to see the localized values. If you also 
+		want to render the pagetitle in your page, set this attribute to &amp;quot;True&amp;quot;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;Please refer to the DNN Skinning Documentation to view the default attributes 
+for all skinobjects, you can download the skinning documentation (as part of the 
+documentation package) here: 
+&lt;a href="http://prdownloads.sourceforge.net/dnn/DotNetNuke_3.1.1_Install.zip"&gt;
+DotNetNuke_3.1.1_Docs.zipppppppp&lt;/a&gt;. Notice this is the DNN 3.1.1. documentation. In 
+order to maintain compatibility, the DNN 3.1.1. version of the core skinobjects 
+were used to make ML versions.&lt;/p&gt;</value>
+  </data>
+  <data name="Access.Denied" xml:space="preserve">
+    <value>Either you are not currently logged in, or you do not have access to this content.</value>
+  </data>
+  <data name="Root.Text" xml:space="preserve">
+    <value>Root</value>
+  </data>
+  <data name="plIsVisible.Text" xml:space="preserve">
+    <value>Is Visible</value>
+  </data>
+  <data name="plPage.Help" xml:space="preserve">
+    <value>This is the original name of the page</value>
+  </data>
+  <data name="plOriginalValues.Help" xml:space="preserve">
+    <value>These are the localized values for the selected locale</value>
+  </data>
+  <data name="plIsVisible.Help" xml:space="preserve">
+    <value>If you want to hide a page for the selected locale, uncheck this option. If a page is made invisible in the Page Settings, you cannot make it visible here.</value>
+  </data>
+  <data name="plLocalizedValues.Help" xml:space="preserve">
+    <value>Enter localized values for Page Name and Page Title in this column.</value>
+  </data>
+  <data name="wrongApiVersion.Text" xml:space="preserve">
+    <value>The version of the installed Apollo.LocalizationApi ({0}) is less than the minimal required version ({1}). Please perform a new install of this PageLocalization module, or ask your hosting provider to do this for you.</value>
+  </data>
+  <data name="lblDescription.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblKeywords.Text" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
+  <data name="plDescription.Text" xml:space="preserve">
+    <value>Description / Keywords</value>
+  </data>
+  <data name="plDescription.Help" xml:space="preserve">
+    <value>Enter localized values for Page Description and Page Keywords in this column</value>
+  </data>
+  <data name="lblPageHeadText.Text" xml:space="preserve">
+    <value>Page Header Tags</value>
+  </data>
+  <data name="plURL.Help" xml:space="preserve">
+    <value>You can select another page to redirect this page for this language to. You can not select pages that are already redirecting to other pages</value>
+  </data>
+  <data name="plURL.Text" xml:space="preserve">
+    <value>Redirect</value>
+  </data>
+  <data name="NoneSelected.Text" xml:space="preserve">
+    <value>[None Selected]</value>
+  </data>
+  <data name="DNNVersionWarning.Text" xml:space="preserve">
+    <value>The DotNetNuke version you are using ({0}) as severe and known issues with respect to localization. You are recommended to upgrade the application to a newer version. Correct functioning of PageLocalization cannot be guaranteed.</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+</root>

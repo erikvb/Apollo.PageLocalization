@@ -1,0 +1,44 @@
+﻿/************************************************************/
+/*****              SQLDataProvider                     *****/
+/*****              PageLocalization                    *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search AND replace operation     *****/
+/*****       for {databaseOwner} AND {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+DECLARE @PackageId INT
+
+IF (SELECT COUNT(*) FROM {databaseOwner}[{objectQualifier}Packages] WHERE NAME = N'Apollo.MLRADMENUSkinObject') = 0
+BEGIN
+    INSERT INTO {databaseOwner}[{objectQualifier}Packages] ([Name], [FriendlyName], [Description], [PackageType], [Version], [Owner], [Organization], [Url], [Email], [IsSystemPackage], [License]) VALUES ( N'Apollo.MLRADMENUSkinObject', N'MLRADMENU SkinObject', N'This SkinObject is part of the Apollo Pagelocalization Module', N'SkinObject', N'1.0.0', N'Erik van Ballegoij', N'Apollo Software', N'www.apollo-software.nl', N'support@apollo-software.nl', 0, N'See for complete license text: http://www.apollo-software.nl/Over/SoftwareLicense/tabid/77/language/en-US/Default.aspx')
+    SELECT @PackageId = SCOPE_IDENTITY()
+    INSERT INTO {databaseOwner}[{objectQualifier}SkinControls] ([PackageID], [ControlKey], [ControlSrc], [IconFile], [HelpUrl], [SupportsPartialRendering]) VALUES (@PackageId, N'MLRADMENU', N'DesktopModules/PageLocalization/MLRADMENU.ascx', NULL, NULL, 0)
+END
+
+IF (SELECT COUNT(*) FROM {databaseOwner}[{objectQualifier}Packages] WHERE NAME = N'Apollo.MLRADPANELBARSkinObject') = 0
+BEGIN
+    INSERT INTO {databaseOwner}[{objectQualifier}Packages] ([Name], [FriendlyName], [Description], [PackageType], [Version], [Owner], [Organization], [Url], [Email], [IsSystemPackage], [License]) VALUES ( N'Apollo.MLRADPANELBARSkinObject', N'MLRADPANELBAR SkinObject', N'This SkinObject is part of the Apollo Pagelocalization Module', N'SkinObject', N'1.0.0', N'Erik van Ballegoij', N'Apollo Software', N'www.apollo-software.nl', N'support@apollo-software.nl', 0, N'See for complete license text: http://www.apollo-software.nl/Over/SoftwareLicense/tabid/77/language/en-US/Default.aspx')
+    SELECT @PackageId = SCOPE_IDENTITY()
+    INSERT INTO {databaseOwner}[{objectQualifier}SkinControls] ([PackageID], [ControlKey], [ControlSrc], [IconFile], [HelpUrl], [SupportsPartialRendering]) VALUES (@PackageId, N'MLRADPANELBAR', N'DesktopModules/PageLocalization/MLRADPANELBAR.ascx', NULL, NULL, 0)
+END
+
+IF (SELECT COUNT(*) FROM {databaseOwner}[{objectQualifier}Packages] WHERE NAME = N'Apollo.MLRADTABSTRIPSkinObject') = 0
+BEGIN
+    INSERT INTO {databaseOwner}[{objectQualifier}Packages] ([Name], [FriendlyName], [Description], [PackageType], [Version], [Owner], [Organization], [Url], [Email], [IsSystemPackage], [License]) VALUES ( N'Apollo.MLRADTABSTRIPSkinObject', N'MLRADTABSTRIP SkinObject', N'This SkinObject is part of the Apollo Pagelocalization Module', N'SkinObject', N'1.0.0', N'Erik van Ballegoij', N'Apollo Software', N'www.apollo-software.nl', N'support@apollo-software.nl', 0, N'See for complete license text: http://www.apollo-software.nl/Over/SoftwareLicense/tabid/77/language/en-US/Default.aspx')
+    SELECT @PackageId = SCOPE_IDENTITY()
+    INSERT INTO {databaseOwner}[{objectQualifier}SkinControls] ([PackageID], [ControlKey], [ControlSrc], [IconFile], [HelpUrl], [SupportsPartialRendering]) VALUES (@PackageId, N'MLRADTABSTRIP', N'DesktopModules/PageLocalization/MLRADTABSTRIP.ascx', NULL, NULL, 0)
+END
+
+IF (SELECT COUNT(*) FROM {databaseOwner}[{objectQualifier}Packages] WHERE NAME = N'Apollo.MLRADTREEVIEWSkinObject') = 0
+BEGIN
+    INSERT INTO {databaseOwner}[{objectQualifier}Packages] ([Name], [FriendlyName], [Description], [PackageType], [Version], [Owner], [Organization], [Url], [Email], [IsSystemPackage], [License]) VALUES ( N'Apollo.MLRADTREEVIEWSkinObject', N'MLRADTREEVIEW SkinObject', N'This SkinObject is part of the Apollo Pagelocalization Module', N'SkinObject', N'1.0.0', N'Erik van Ballegoij', N'Apollo Software', N'www.apollo-software.nl', N'support@apollo-software.nl', 0, N'See for complete license text: http://www.apollo-software.nl/Over/SoftwareLicense/tabid/77/language/en-US/Default.aspx')
+    SELECT @PackageId = SCOPE_IDENTITY()
+    INSERT INTO {databaseOwner}[{objectQualifier}SkinControls] ([PackageID], [ControlKey], [ControlSrc], [IconFile], [HelpUrl], [SupportsPartialRendering]) VALUES (@PackageId, N'MLRADTREEVIEW', N'DesktopModules/PageLocalization/MLRADTREEVIEW.ascx', NULL, NULL, 0)
+END

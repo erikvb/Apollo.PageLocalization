@@ -1,0 +1,2 @@
+<%@ Control Language="vb" AutoEventWireup="false" Codebehind="MLPageTitle.ascx.vb" Inherits="Apollo.DNN.SkinObjects.MLPageTitle" %>
+<asp:Label id=lblPageTitle runat="server" CssClass="Head"></asp:Label>

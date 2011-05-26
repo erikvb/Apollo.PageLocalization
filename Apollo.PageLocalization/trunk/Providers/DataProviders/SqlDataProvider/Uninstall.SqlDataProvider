@@ -1,0 +1,244 @@
+﻿/************************************************************/
+/*****              SQLDataProvider                     *****/
+/*****              PageLocalization                    *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+DELETE FROM {databaseOwner}{objectQualifier}ModuleControls WHERE (ControlKey LIKE 'ML%') AND ControlSrc LIKE '%PageLocalization%'
+GO
+
+DELETE FROM {databaseOwner}{objectQualifier}SkinControls WHERE (ControlKey LIKE 'ML%') AND (ControlSrc LIKE '%PageLocalization%')
+DELETE FROM {databaseOwner}{objectQualifier}Packages WHERE (Name LIKE 'Apollo.ML%') AND (FriendlyName LIKE '%SkinObject') AND (Description LIKE '%PageLocalization%')
+GO
+
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}Apollo_TabLocalization_Tabs]')
+                    AND type = 'F' ) 
+    ALTER TABLE {databaseOwner}[{objectQualifier}Apollo_TabLocalization] DROP CONSTRAINT [FK_{objectQualifier}Apollo_TabLocalization_Tabs]
+GO
+
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'[DF_{objectQualifier}Apollo_TabLocalization_HideTab]')
+                    AND type = 'D' ) 
+    ALTER TABLE {databaseOwner}[{objectQualifier}Apollo_TabLocalization] DROP CONSTRAINT [DF_{objectQualifier}Apollo_TabLocalization_HideTab]
+GO
+
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}Apollo_TabLocalization_Redirects_Tabs_Re]')
+                    AND type = 'F' ) 
+    ALTER TABLE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_Redirects] DROP CONSTRAINT [FK_{objectQualifier}Apollo_TabLocalization_Redirects_Tabs_Re]
+GO
+
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[FK_{objectQualifier}Apollo_TabLocalization_Redirects_Tabs_Src]')
+                    AND type = 'F' ) 
+    ALTER TABLE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_Redirects] DROP CONSTRAINT [FK_{objectQualifier}Apollo_TabLocalization_Redirects_Tabs_Src]
+GO
+
+/****** Object:  Table {databaseOwner}[{objectQualifier}Apollo_TabLocalization]  ******/
+IF  EXISTS ( SELECT  *
+                FROM    dbo.sysobjects
+                WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalization]')
+                        AND OBJECTPROPERTY(id, N'IsUserTable') = 1 ) 
+    DROP TABLE {databaseOwner}[{objectQualifier}Apollo_TabLocalization]
+GO
+
+/****** Object:  Table {databaseOwner}[{objectQualifier}Apollo_TabLocalization_Redirects]  ******/
+IF  EXISTS ( SELECT  *
+                FROM    dbo.sysobjects
+                WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalization_Redirects]')
+                        AND OBJECTPROPERTY(id, N'IsUserTable') = 1 ) 
+    DROP TABLE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_Redirects]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsAdd]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsAdd]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsAdd]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsDelete]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsDelete]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsDelete]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsGet]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsGet]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsGet]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsGetByReTabs]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsGetByReTabs]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsGetByReTabs]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsGetBySrcTabs]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsGetBySrcTabs]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsGetBySrcTabs]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsUpdate]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsUpdate]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_RedirectsUpdate]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationAdd]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationAdd]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationAdd]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationDelete]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationDelete]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationDelete]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGet]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationGet]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGet]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByItemID]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByItemID]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByItemID]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByLocale]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByLocale]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByLocale]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByLocaleAndParent]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByLocaleAndParent]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByLocaleAndParent]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByTabs]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByTabs]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByTabs]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByTabsAndLocale]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByTabsAndLocale]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetByTabsAndLocale]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetTabsToRedirect]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetTabsToRedirect]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetTabsToRedirect]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationList]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationList]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationList]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdate]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdate]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdate]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateOrAdd]  ******/
+IF EXISTS ( SELECT  *
+            FROM    dbo.sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateOrAdd]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateOrAdd]
+GO
+
+/****** Object:  UserDefinedFunction {databaseOwner}[fn_{objectQualifier}Apollo_TabLocalization_Tabs]  ******/
+IF EXISTS ( SELECT  *
+            FROM    sys.objects
+            WHERE   object_id = OBJECT_ID(N'{databaseOwner}[fn_{objectQualifier}Apollo_TabLocalization_Tabs]')
+                    AND type IN ( N'FN', N'IF', N'TF', N'FS', N'FT' ) ) 
+    DROP FUNCTION {databaseOwner}[fn_{objectQualifier}Apollo_TabLocalization_Tabs]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaultsSingle]    ******/
+IF EXISTS ( SELECT  *
+            FROM    sys.objects
+            WHERE   object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaultsSingle]')
+                    AND type IN ( N'P', N'PC' ) ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaultsSingle]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalization_UpdateTabPaths]    ******/
+IF EXISTS ( SELECT  *
+            FROM    sys.objects
+            WHERE   object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalization_UpdateTabPaths]')
+                    AND type IN ( N'P', N'PC' ) ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_UpdateTabPaths]
+GO

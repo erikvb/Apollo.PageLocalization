@@ -1,0 +1,37 @@
+Installation instruction for Apollo PageLocalization 5.0
+
+Apollo Software packages modules in a special distribution packages, which has the following structure:
+
+For PA only distributions:
+filename: Apollo.[ModuleName].[Version].Zip
+- Docs
+	- releasenotes.txt
+	- installation.txt
+	- license.txt
+- Apollo.[ModuleName].install.[Version].zip
+- Apollo_PageLoczalization_SampleSkin.zip
+
+
+For Source Distributions:
+filename: Apollo.[ModuleName].Full.[Version].Zip
+- Docs
+	- releasenotes.txt
+	- installation.txt
+	- license.txt
+- Apollo.[ModuleName].install.[Version].zip
+- Apollo.[ModuleName].SOURCE.[Version].zip
+- Apollo_PageLoczalization_SampleSkin.zip
+
+
+The source zip file is packaged in the same way as the dnn core modules, 
+meaning that the source is contained in the resources.zip file. This means that you can just install the 
+source zip file, and all sources will be unpacked. Sample-ML-DNN-Blue is a sample skin that you can install to 
+see imediate result of your localized page. Please install the skin only after you installed the module, 
+as he module contains skinobjects that are necessary to succesfully parse the skin during installation.
+
+**** SPECIAL INSTRUCTIONS FOR PageLocalization ****
+NB: in order for this module to work, special skinobjects are necessary. The module includes modified versions of 
+the core navigational skinobjects, and some third party skinobject and modules are also available.
+
+
+Please check the forums on www.apollo-software.nl if you have any diffuculty installing or using this module.

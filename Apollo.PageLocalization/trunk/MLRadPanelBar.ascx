@@ -1,0 +1,2 @@
+<%@ Control Language="vb" AutoEventWireup="false" Explicit="True" Inherits="Apollo.DNN.SkinObjects.MLRadPanelBar" Codebehind="MLRadPanelBar.ascx.vb" %>
+<asp:PlaceHolder id="LeftMenu1" runat="server" />

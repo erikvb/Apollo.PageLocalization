@@ -1,0 +1,21 @@
+Release Notes for Apollo LocalizationApi for DotNetNuke 5.0.0 and up
+
+version 05.00.00 - 1/8/2009
+* fixed compatibility issues with DNN 5.0.0. From this version on only compatible with DNN 5.0.0 or newer!
+* refactored skinobjects to be in line with DNN core skinobjects
+
+version 03.00.00 - 9/28/2008
+* overhauled admin interface, added treeview for clarity
+* Added page redirect functionality
+
+version 02.00.00
+* enhanced inheritance from core tabinfo class
+* support for late binding
+
+version 01.01.00
+* tablocalizationInfo class now inherits from tabinfo, making it easier to use 
+* hiding of tabs for specified locales is now supported
+
+version 01.00.00
+* Initial Version - supports localization of tabs
+

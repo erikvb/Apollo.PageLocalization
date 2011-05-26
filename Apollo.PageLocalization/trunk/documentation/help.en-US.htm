@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title>help_en_US</title>
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="ProgId" content="VisualStudio.HTML">
+		<meta name="Originator" content="Microsoft Visual Studio .NET 7.1">
+	</head>
+	<body>
+		<h1>Page Localization</h1>
+		<p>The Page Localization Module lets you translate the names and titles of the 
+			pages in your portal. The translated values are saved in the database, and easy 
+			editable. Rendering of the localized page names is being done by multi language 
+			enabled skin objects, which are part of this module package. Only after you 
+			replaced the default DotNetNuke menu objects (ie. solpartmenu, breadcrumbs, 
+			links, pagetitle, treeview) will the localized page names be visible.</p>
+		<p>The following skinobjects are installed during the installation of the module: 
+            MLNAV, 
+			MLMENU, MLTREEVIEW, MLPAGETITLE, MLLINKS and MLBREADCRUMB. These skinobjects 
+			are completely compatible with the corresponding dnn skinobjects, however, some 
+			of the skinobjects have extra features. This is a list of all extra and changed 
+			attributes of the skinobjects
+		</p>
+		<table border="1" width="500" cellspacing="0" cellpadding="4" style="border-collapse: collapse"
+			ID="Table1">
+			<tr>
+				<td valign="top"><b>SkinObject</b></td>
+				<td valign="top"><b>Attribute</b></td>
+				<td valign="top"><b>Allowed Values</b></td>
+				<td valign="top"><b>Default Value</b></td>
+				<td valign="top"><b>Comments</b></td>
+			</tr>
+			<tr>
+				<td valign="top" rowspan="4">[MLMENU]<p>
+					&nbsp;</td>
+				<td valign="top">ParentID</td>
+				<td valign="top">Valid integers</td>
+				<td valign="top">empty</td>
+				<td valign="top">You can set the TabID that has to be used as parent for the menu 
+					directly with this attribute. Just pass a valid TabID, and only child tabs of 
+					that tab will be visible in the menu</td>
+			</tr>
+			<tr>
+				<td valign="top">Level</td>
+				<td valign="top">&quot;child&quot;<p>&quot;same&quot;</p>
+					<p>
+					&quot;levelX&quot;
+				</td>
+				<td valign="top">ParentID or Root
+				</td>
+				<td valign="top">If you pass a value for Level, it takes precedence over the passed 
+					ParentID.
+					<p>You can pass a specific TabID as parent, if you use this syntax:<br>
+						Level = &quot;levelX&quot;,
+						<br>
+						where X is the level of the tab you wish to use as parent for the menu. For 
+						instance lets assume you have the following tabstructure:</p>
+					<ul>
+						<li>
+							100<ul>
+								<li>
+									101<ul>
+										<li>
+											111</li>
+										<li>
+											112</li>
+										<li>
+											113</li>
+										<li>
+											114</li>
+									</ul>
+								</li>
+								<li>
+									102<ul>
+										<li>
+											121</li>
+										<li>
+											122</li>
+										<li>
+											123</li>
+										<li>
+											124</li>
+									</ul>
+								</li>
+								<li>
+									103<ul>
+										<li>
+											131</li>
+										<li>
+											132</li>
+										<li>
+											133</li>
+										<li>
+											134</li>
+									</ul>
+								</li>
+								<li>
+									104<ul>
+										<li>
+											141</li>
+										<li>
+											142</li>
+										<li>
+											143</li>
+										<li>
+											144</li>
+										<li>
+											145</li>
+									</ul>
+								</li>
+								<li>
+									105<ul>
+										<li>
+											151</li>
+										<li>
+											152</li>
+										<li>
+											153</li>
+										<li>
+											154</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<p>
+					Now, if you pass &quot;level1&quot; to the skinobject, no matter what page you 
+					are on, the menu will always show with an ancestor tab of the current tab that 
+					has level 1 (ie, 101, 102. 103, 104 or 105)</td>
+			</tr>
+			<tr>
+				<td valign="top">ShowAdmin</td>
+				<td valign="top">&quot;True&quot;<p>
+					&quot;False&quot;</td>
+				<td valign="top">&quot;True&quot;</td>
+				<td valign="top">If you set this attribute to &quot;False&quot;, the admin and host 
+					menu's will not be rendered. This is useful if you want to use this menu in an 
+					admin skin, and you don't want the admin menu's to disrupt your skin</td>
+			</tr>
+			<tr>
+				<td valign="top">OnlyAdmin</td>
+				<td valign="top">&quot;True&quot;<p>
+					&quot;False&quot;</td>
+				<td valign="top">&quot;False&quot;</td>
+				<td valign="top">If you set this attribute to &quot;True&quot;, only the admin and 
+					host menu's will be rendered. This is useful if you want to use this menu in an 
+					admin skin, and you don't want the admin menu's to disrupt your skin. This 
+					attribute will let you put the admin menu's on a different location of your 
+					page</td>
+			</tr>
+			<tr>
+				<td valign="top">[MLPAGETITLE]</td>
+				<td valign="top">Visible</td>
+				<td valign="top">&quot;True&quot;<p>
+					&quot;False&quot;</td>
+				<td valign="top">&quot;False&quot;</td>
+				<td valign="top">This skinobject is used to change the page attributes, like title, 
+					description and keywords. As such, it is always necessary to use this 
+					skinobject, in order to see the localized values. If you also want to render 
+					the pagetitle in your page, set this attribute to &quot;True&quot;</td>
+			</tr>
+		</table>
+		<p>Please refer to the DNN Skinning Documentation to view the default attributes 
+			for all skinobjects, you can download the skinning documentation (as part of 
+			the documentation package) here: <a href="http://www.dotnetnuke.com/Resources/Documentation/DownloadableFiles/tabid/478/Default.aspx">
+				DotNetNuke Documentation</a></p>
+	</body>
+</html>

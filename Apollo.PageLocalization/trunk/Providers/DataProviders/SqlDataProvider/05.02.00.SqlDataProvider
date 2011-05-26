@@ -1,0 +1,106 @@
+﻿/************************************************************/
+/*****              SQLDataProvider                     *****/
+/*****              PageLocalization                    *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search AND replace operation     *****/
+/*****       for  AND   *****/
+/*****                                                  *****/
+/************************************************************/
+
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]  ******/
+IF EXISTS ( SELECT  *
+            FROM    sys.objects
+            WHERE   object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]')
+                    AND type IN ( N'P', N'PC' ) ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]
+GO
+
+
+/****** Object:  StoredProcedure {databaseOwner}[Apollo_TabLocalizationFillDefaults]   ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+/****** Object:  Stored Procedure  {databaseOwner}{objectQualifier}Apollo_TabLocalizationFillDefaults     ******/
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]
+    @Locale NVARCHAR(15) ,
+    @PortalID INT
+AS 
+-- copyright (c) 2010 by Erik van Ballegoij ( erik@apollo-software.nl ) ( http://www.apollo-software.nl )
+    DECLARE @Dnn530OrNewer BIT
+    SELECT  @Dnn530OrNewer = {databaseOwner}[fn_GetVersion](5, 3, 0)
+
+    IF @Dnn530OrNewer = 0 
+	    -- pre DotNetNuke 5.3.0, so use old style sproc
+        BEGIN
+    INSERT  INTO {objectQualifier}Apollo_tabLocalization
+            ( tabID ,
+              Locale ,
+              Tabname ,
+              Title ,
+              Description ,
+              Keywords ,
+              hideTab ,
+              PageHeadText
+            )
+            ( SELECT    tabid ,
+                        @Locale ,
+                        tabname ,
+                        title ,
+                        T.description ,
+                        T.keywords ,
+                        ~T.IsVisible ,
+                        T.PageHeadText
+              FROM      {databaseOwner}{objectQualifier}vw_Tabs AS T
+                INNER JOIN {databaseOwner}{objectQualifier}vw_Portals AS P ON T.PortalID = P.PortalID
+                                                  AND T.TabID <> P.AdminTabId
+                                                  AND ISNULL(T.ParentId, -1) <> P.AdminTabId
+              WHERE     ( T.portalId = @PortalID )
+                        AND ( NOT EXISTS ( SELECT   *
+                                           FROM     {objectQualifier}Apollo_tabLocalization tl
+                                           WHERE    ( tl.tabid = T.tabid )
+                                                    AND ( tl.Locale = @Locale ) )
+                            )
+            )
+        END
+    ELSE 
+        BEGIN
+		-- DotNetNuke 5.3.0 or newer, take into account multiple records per portalId in Portals table (one record per locale)
+    INSERT  INTO {objectQualifier}Apollo_tabLocalization
+            ( tabID ,
+              Locale ,
+              Tabname ,
+              Title ,
+              Description ,
+              Keywords ,
+              hideTab ,
+              PageHeadText
+            )
+            ( SELECT    tabid ,
+                        @Locale ,
+                        tabname ,
+                        title ,
+                        T.description ,
+                        T.keywords ,
+                        ~T.IsVisible ,
+                        T.PageHeadText
+              FROM      {databaseOwner}{objectQualifier}vw_Tabs AS T
+                INNER JOIN {databaseOwner}{objectQualifier}vw_Portals AS P ON @Locale = P.CultureCode
+                                                  AND T.PortalID = P.PortalID
+                                                  AND T.TabID <> P.AdminTabId
+                                                  AND ISNULL(T.ParentId, -1) <> P.AdminTabId
+              WHERE     ( T.portalId = @PortalID )
+                        AND ( NOT EXISTS ( SELECT   *
+                                           FROM     {objectQualifier}Apollo_tabLocalization tl
+                                           WHERE    ( tl.tabid = T.tabid )
+                                                    AND ( tl.Locale = @Locale ) )
+                            )
+            )
+        END
+
+GO
+

@@ -1,0 +1,42 @@
+/* ================================
+    CSS STYLES FOR Module PageLocalization
+   ================================
+*/
+
+.TableAlternateStyle
+{
+	font-weight: bold;
+    color: #003366;
+	background-color: silver;
+}
+
+.TableItemStyle
+{
+	font-weight: bold;
+    color: #003366;
+	background-color:  Transparent ;
+}
+
+.pl_NormalNode
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bolder;
+}
+
+.pl_NormalNodeSelected
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color: #6699FF;
+	font-weight: bolder;
+	color: #FFFFFF;
+}
+
+.pl_NormalNodeHover
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color: #CCCCFF;
+	font-weight: bolder;
+}

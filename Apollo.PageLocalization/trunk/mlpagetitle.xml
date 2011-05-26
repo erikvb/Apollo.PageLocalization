@@ -1,0 +1,14 @@
+<Settings>
+  <Setting>
+    <Name>CssClass</Name>
+    <Type>String</Type>
+    <Help>Sets the CSS class used to render this skin object</Help>
+    <Value></Value>
+  </Setting>
+  <Setting>
+    <Name>Visible</Name>
+    <Type>Boolean</Type>
+    <Help>Whether the pagetitle is visibly rendered or not</Help>
+    <Value>True,False</Value>
+  </Setting>
+</Settings>

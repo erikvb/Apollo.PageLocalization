@@ -1,0 +1,526 @@
+﻿/******* update table *****/
+
+DECLARE @objectid BIGINT
+
+SELECT @objectid = object_id FROM sys.objects
+WHERE name = '{objectQualifier}Apollo_TabLocalization' AND (type='U')
+
+if not exists (SELECT * FROM sys.columns WHERE (object_id = @objectid) AND (name = 'TabPath')) 
+begin
+    ALTER TABLE {databaseOwner}[{objectQualifier}Apollo_TabLocalization] ADD
+    [TabPath] [nvarchar] (max) NULL,
+    [CreatedByUserID] [int] NULL,
+    [CreatedOnDate] [datetime] NULL,
+    [LastModifiedByUserID] [int] NULL,
+    [LastModifiedOnDate] [datetime] NULL
+end
+
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationAdd]  ******/
+IF EXISTS ( SELECT  *
+            FROM    {databaseOwner}sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationAdd]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationAdd]
+GO
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdate]  ******/
+IF EXISTS ( SELECT  *
+            FROM    {databaseOwner}sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdate]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdate]
+GO
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale]  ******/
+IF EXISTS ( SELECT  *
+            FROM    {databaseOwner}sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale]
+GO
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateOrAdd]  ******/
+IF EXISTS ( SELECT  *
+            FROM    {databaseOwner}sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateOrAdd]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateOrAdd]
+GO
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetTabsToRedirect]  ******/
+IF EXISTS ( SELECT  *
+            FROM    {databaseOwner}sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetTabsToRedirect]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetTabsToRedirect]
+GO
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]  ******/
+IF EXISTS ( SELECT  *
+            FROM    {databaseOwner}sysobjects
+            WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]')
+                    AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]
+GO
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaultsSingle]    ******/
+IF EXISTS ( SELECT  *
+            FROM    sys.objects
+            WHERE   object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaultsSingle]')
+                    AND type IN ( N'P', N'PC' ) ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaultsSingle]
+GO
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalization_UpdateTabPaths]    ******/
+IF EXISTS ( SELECT  *
+            FROM    sys.objects
+            WHERE   object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalization_UpdateTabPaths]')
+                    AND type IN ( N'P', N'PC' ) ) 
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_UpdateTabPaths]
+GO
+
+GO
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetLastTabUpdate]    Script Date: 05/20/2011 19:32:27 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetLastTabUpdate]') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetLastTabUpdate]
+GO
+
+/****** Object:  Stored Procedure  {databaseOwner}{objectQualifier}Apollo_TabLocalizationAdd     ******/
+CREATE   PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationAdd]
+    @TabID INT ,
+    @Locale NVARCHAR(15) ,
+    @TabName NVARCHAR(500) ,
+    @Title NVARCHAR(500) ,
+    @Description NVARCHAR(500) ,
+    @Keywords NVARCHAR(500) ,
+    @IsVisible BIT ,
+    @PageHeadText NVARCHAR(4000) ,
+    @CreatedByUserID INT
+AS -- copyright (c) 2011 by Erik van Ballegoij ( erik@apollo-software.nl ) ( http://www.apollo-software.nl )
+
+    INSERT  INTO {databaseOwner}{objectQualifier}Apollo_TabLocalization
+            ( TabID ,
+              Locale ,
+              TabName ,
+              Title ,
+              Description ,
+              Keywords ,
+              hideTab ,
+              PageHeadText ,
+              CreatedByUserID ,
+              CreatedOnDate ,
+              LastModifiedByUserID ,
+              LastModifiedOnDate
+            )
+    VALUES  ( @TabID ,
+              @Locale ,
+              @TabName ,
+              @Title ,
+              @Description ,
+              @Keywords ,
+              ~@IsVisible ,
+              @PageHeadText ,
+              @CreatedByUserID ,
+              GETDATE() ,
+              @CreatedByUserID ,
+              GETDATE()
+            )
+
+    SELECT  SCOPE_IDENTITY()
+
+GO
+
+
+/****** Object:  Stored Procedure  {databaseOwner}{objectQualifier}Apollo_TabLocalizationUpdate     ******/
+CREATE    PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdate]
+    @ItemID INT ,
+    @TabID INT ,
+    @Locale NVARCHAR(15) ,
+    @TabName NVARCHAR(500) ,
+    @Title NVARCHAR(500) ,
+    @Description NVARCHAR(500) ,
+    @Keywords NVARCHAR(500) ,
+    @IsVisible BIT ,
+    @PageHeadText NVARCHAR(4000) ,
+    @LastModifiedByUserID INT
+AS -- copyright (c) 2011 by Erik van Ballegoij ( erik@apollo-software.nl ) ( http://www.apollo-software.nl )
+
+    UPDATE  {databaseOwner}{objectQualifier}Apollo_TabLocalization
+    SET     TabID = @TabID ,
+            Locale = @Locale ,
+            TabName = @TabName ,
+            Title = @Title ,
+            Description = @Description ,
+            Keywords = @Keywords ,
+            hideTab = ~@IsVisible ,
+            PageHeadText = @PageHeadText ,
+            LastModifiedByUserID = @LastModifiedByUserID ,
+            LastModifiedOnDate = GETDATE()
+    WHERE   ItemID = @ItemID
+
+GO
+
+
+/****** Object:  Stored Procedure  {databaseOwner}{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale     ******/
+CREATE    PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale]
+    @ItemID INT ,
+    @TabID INT ,
+    @Locale NVARCHAR(15) ,
+    @TabName NVARCHAR(500) ,
+    @Title NVARCHAR(500) ,
+    @Description NVARCHAR(500) ,
+    @Keywords NVARCHAR(500) ,
+    @IsVisible BIT ,
+    @PageHeadText NVARCHAR(4000) ,
+    @LastModifiedByUserID INT
+AS -- copyright (c) 2011 by Erik van Ballegoij ( erik@apollo-software.nl ) ( http://www.apollo-software.nl )
+
+    UPDATE  {databaseOwner}{objectQualifier}Apollo_TabLocalization
+    SET     TabName = @TabName ,
+            Title = @Title ,
+            Description = @Description ,
+            Keywords = @Keywords ,
+            hideTab = ~@IsVisible ,
+            PageHeadText = @PageHeadText ,
+            LastModifiedByUserID = @LastModifiedByUserID ,
+            LastModifiedOnDate = GETDATE()
+    WHERE   tabID = @TabID
+            AND locale = @Locale
+    
+GO
+
+
+/****** Object:  Stored Procedure  {databaseOwner}{objectQualifier}Apollo_TabLocalizationUpdateOrAdd     ******/
+CREATE     PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateOrAdd]
+    @ItemID INT ,
+    @TabID INT ,
+    @Locale NVARCHAR(15) ,
+    @TabName NVARCHAR(500) ,
+    @Title NVARCHAR(500) ,
+    @Description NVARCHAR(500) ,
+    @Keywords NVARCHAR(500) ,
+    @IsVisible BIT ,
+    @PageHeadText NVARCHAR(4000) ,
+    @LastModifiedByUserID INT
+AS -- copyright (c) 2011 by Erik van Ballegoij ( erik@apollo-software.nl ) ( http://www.apollo-software.nl )
+
+    IF EXISTS ( SELECT  itemID
+                FROM    {databaseOwner}{objectQualifier}Apollo_TabLocalization
+                WHERE   TabID = @TabID
+                        AND Locale = @Locale ) 
+        EXEC {databaseOwner}{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale @ItemID, @TabID,
+            @Locale, @TabName, @Title, @Description, @Keywords, @IsVisible,
+            @PageHeadText, @LastModifiedByUserID
+    ELSE 
+        EXEC {databaseOwner}{objectQualifier}Apollo_TabLocalizationAdd @TabID, @Locale, @TabName, @Title,
+            @Description, @Keywords, @IsVisible, @PageHeadText,
+            @LastModifiedByUserID
+
+GO
+
+
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_UpdateTabPaths]
+    @TabId INT = NULL ,
+    @PortalId INT = NULL
+AS 
+    WITH    TabPaths ( TabId, ParentId, TabName, TabPath, NewTabPath, Locale, LastModifiedOnDate )
+              AS ( SELECT   T.TabId ,
+                            T.ParentId ,
+                            TL.TabName ,
+                            T.TabPath ,
+                            CONVERT(NVARCHAR(MAX), '//' + TL.TabName) AS NewTabPath ,
+                            Locale ,
+                            T.LastModifiedOnDate
+                   FROM     {databaseOwner}{objectQualifier}vw_Tabs AS T
+                            INNER JOIN {databaseOwner}{objectQualifier}Apollo_TabLocalization AS TL ON T.TabId = TL.TabId
+                   WHERE    ( T.TabID = @TabId )
+                            OR ( T.PortalID = @PortalId )
+                            OR ( ( @TabId IS NULL )
+                                 AND ( @PortalId IS NULL )
+                                 AND ( ISNULL(T.ParentId, -1) = -1 )
+                               )
+                   UNION ALL
+                   SELECT   T1.TabId ,
+                            T1.ParentId ,
+                            TL2.TabName ,
+                            T1.TabPath ,
+                            CASE WHEN DATALENGTH(TP.NewTabPath) > 0
+                                 THEN TP.NewTabPath + '//' + TL2.TabName
+                                 ELSE '//' + TL2.TabName
+                            END AS NewTabPath ,
+                            TL2.Locale ,
+                            T1.LastModifiedOnDate
+                   FROM     {databaseOwner}{objectQualifier}vw_Tabs AS T1
+                            INNER JOIN {databaseOwner}{objectQualifier}Apollo_TabLocalization AS TL2 ON T1.TabID = TL2.TabID
+                            JOIN TabPaths AS TP ON T1.ParentId = TP.TabId
+                 )
+        SELECT DISTINCT
+                *
+        INTO    #ResultTable
+        FROM    TabPaths
+        ORDER BY tabid ASC ;
+    
+
+
+    UPDATE  {databaseOwner}{objectQualifier}Apollo_TabLocalization
+    SET     TabPath = R.NewTabPath
+    FROM    {databaseOwner}{objectQualifier}Apollo_TabLocalization T
+            INNER JOIN #ResultTable R ON T.TabID = R.tabid
+                                         AND T.Locale = R.Locale
+    WHERE   R.LastModifiedOnDate > T.LastModifiedOnDate
+            OR T.TabPath IS NULL ;
+
+    DROP TABLE #ResultTable ;
+
+
+
+GO
+
+
+
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetLastTabUpdate]    Script Date: 05/20/2011 19:31:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetLastTabUpdate]
+	@PortalId int
+AS
+BEGIN
+	SELECT MAX(LastModifiedOnDate) from {databaseOwner}{objectQualifier}Tabs where PortalID = @PortalId
+END
+GO
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaultsSingle]    Script Date: 05/20/2011 19:31:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/****** Object:  Stored Procedure  {databaseOwner}{objectQualifier}Apollo_TabLocalizationFillDefaultsSingle     ******/
+CREATE    PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaultsSingle]
+    @Locale NVARCHAR(15) ,
+    @PortalID INT ,
+    @CreatedByUserId INT
+AS -- copyright (c) 2011 by Erik van Ballegoij ( erik@apollo-software.nl ) ( http://www.apollo-software.nl )
+
+    DECLARE @Dnn530OrNewer BIT
+    SELECT  @Dnn530OrNewer = {databaseOwner}{objectQualifier}fn_GetVersion(5, 3, 0)
+
+    IF @Dnn530OrNewer = 0 
+        BEGIN
+        print 'old'
+            INSERT  INTO {databaseOwner}{objectQualifier}Apollo_tabLocalization
+                    ( tabID ,
+                      Locale ,
+                      Tabname ,
+                      Title ,
+                      Description ,
+                      Keywords ,
+                      hideTab ,
+                      PageHeadText ,
+                      CreatedByUserID ,
+                      CreatedOnDate ,
+                      LastModifiedByUserID ,
+                      LastModifiedOnDate
+                    )
+                    ( SELECT    tabid ,
+                                @Locale ,
+                                tabname ,
+                                title ,
+                                T.description ,
+                                T.keywords ,
+                                ~T.IsVisible ,
+                                T.PageHeadText ,
+                                @CreatedByUserID ,
+                                GETDATE() ,
+                                @CreatedByUserID ,
+                                GETDATE()
+                      FROM      {databaseOwner}{objectQualifier}vw_Tabs AS T
+                                INNER JOIN {databaseOwner}{objectQualifier}vw_Portals AS P ON T.PortalID = P.PortalID
+                                                              AND T.TabID <> P.AdminTabId
+                                                              AND ISNULL(T.ParentId,
+                                                              -1) <> P.AdminTabId
+                      WHERE     ( T.portalId = @PortalID )
+                                AND ( NOT EXISTS ( SELECT   *
+                                                   FROM     {databaseOwner}{objectQualifier}Apollo_tabLocalization tl
+                                                   WHERE    ( tl.tabid = T.tabid )
+                                                            AND ( tl.Locale = @Locale ) )
+                                    )
+                                AND ( NOT T.IsDeleted = 1
+                                    )
+                    )
+                    
+                    SELECT    tabid ,
+                                @Locale ,
+                                tabname ,
+                                title ,
+                                T.description ,
+                                T.keywords ,
+                                ~T.IsVisible ,
+                                T.PageHeadText ,
+                                @CreatedByUserID ,
+                                GETDATE() ,
+                                @CreatedByUserID ,
+                                GETDATE()
+                      FROM      {databaseOwner}{objectQualifier}vw_Tabs AS T
+                                INNER JOIN {databaseOwner}{objectQualifier}vw_Portals AS P ON T.PortalID = P.PortalID
+                                                              AND T.TabID <> P.AdminTabId
+                                                              AND ISNULL(T.ParentId,
+                                                              -1) <> P.AdminTabId
+                      WHERE     ( T.portalId = @PortalID )
+                                AND ( NOT EXISTS ( SELECT   *
+                                                   FROM     {databaseOwner}{objectQualifier}Apollo_tabLocalization tl
+                                                   WHERE    ( tl.tabid = T.tabid )
+                                                            AND ( tl.Locale = @Locale ) )
+                                    )
+                                AND ( NOT T.IsDeleted = 1
+                                    )
+
+        END
+    ELSE 
+        BEGIN
+                print 'newer'
+
+            INSERT  INTO {databaseOwner}{objectQualifier}Apollo_tabLocalization
+                    ( tabID ,
+                      Locale ,
+                      Tabname ,
+                      Title ,
+                      Description ,
+                      Keywords ,
+                      hideTab ,
+                      PageHeadText ,
+                      CreatedByUserID ,
+                      CreatedOnDate ,
+                      LastModifiedByUserID ,
+                      LastModifiedOnDate
+                    )
+                    ( SELECT    tabid ,
+                                @Locale ,
+                                tabname ,
+                                title ,
+                                T.description ,
+                                T.keywords ,
+                                ~T.IsVisible ,
+                                T.PageHeadText ,
+                                @CreatedByUserID ,
+                                GETDATE() ,
+                                @CreatedByUserID ,
+                                GETDATE()
+                      FROM      {databaseOwner}{objectQualifier}vw_Tabs AS T
+                                INNER JOIN {databaseOwner}{objectQualifier}vw_Portals AS P ON @Locale = P.CultureCode
+                                                              AND T.PortalID = P.PortalID
+                                                              AND T.TabID <> P.AdminTabId
+                                                              AND ISNULL(T.ParentId,
+                                                              -1) <> P.AdminTabId
+                      WHERE     ( T.portalId = @PortalID )
+                                AND ( NOT EXISTS ( SELECT   *
+                                                   FROM     {databaseOwner}{objectQualifier}Apollo_tabLocalization tl
+                                                   WHERE    ( tl.tabid = T.tabid )
+                                                            AND ( tl.Locale = @Locale ) )
+                                    )
+                                AND ( NOT T.IsDeleted = 1
+                                    )
+                    )
+                    
+                    SELECT    tabid ,
+                                @Locale ,
+                                tabname ,
+                                title ,
+                                T.description ,
+                                T.keywords ,
+                                ~T.IsVisible ,
+                                T.PageHeadText ,
+                                @CreatedByUserID ,
+                                GETDATE() ,
+                                @CreatedByUserID ,
+                                GETDATE()
+                      FROM      {databaseOwner}{objectQualifier}vw_Tabs AS T
+                                INNER JOIN {databaseOwner}{objectQualifier}vw_Portals AS P ON @Locale = P.CultureCode
+                                                              AND T.PortalID = P.PortalID
+                                                              AND T.TabID <> P.AdminTabId
+                                                              AND ISNULL(T.ParentId,
+                                                              -1) <> P.AdminTabId
+                      WHERE     ( T.portalId = @PortalID )
+                                AND ( NOT EXISTS ( SELECT   *
+                                                   FROM     {databaseOwner}{objectQualifier}Apollo_tabLocalization tl
+                                                   WHERE    ( tl.tabid = T.tabid )
+                                                            AND ( tl.Locale = @Locale ) )
+                                    )
+                                AND ( NOT T.IsDeleted = 1
+                                    )
+
+        END
+GO
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]    Script Date: 05/20/2011 19:31:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/****** Object:  Stored Procedure  {databaseOwner}{objectQualifier}Apollo_TabLocalizationFillDefaults     ******/
+CREATE    PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]
+    @LocalPortalID INT ,
+    @LocalCreatedByUserId INT
+AS -- copyright (c) 2011 by Erik van Ballegoij ( erik@apollo-software.nl ) ( http://www.apollo-software.nl )
+
+    DECLARE @PortalLocale NVARCHAR(15)
+
+    DECLARE Locales_Cursor CURSOR FOR
+    SELECT     {databaseOwner}{objectQualifier}Languages.CultureCode
+    FROM         {databaseOwner}{objectQualifier}Languages INNER JOIN
+    {databaseOwner}{objectQualifier}PortalLanguages ON {databaseOwner}{objectQualifier}Languages.LanguageID = {databaseOwner}{objectQualifier}PortalLanguages.LanguageID
+    WHERE     ({databaseOwner}{objectQualifier}PortalLanguages.PortalID = 0)
+    ORDER BY {databaseOwner}{objectQualifier}Languages.LanguageID
+
+    OPEN Locales_Cursor
+
+    FETCH NEXT FROM Locales_Cursor
+    INTO @PortalLocale
+
+    WHILE @@FETCH_STATUS = 0 
+        BEGIN
+
+
+			print 'EXEC {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaultsSingle] @Locale = ' + @PortalLocale + ',
+                @PortalID = ' + cast(@LocalPortalID as nvarchar)+ ',
+                @CreatedByUserId = ' + cast(@LocalCreatedByUserId as nvarchar)
+
+            EXEC {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaultsSingle] @Locale = @PortalLocale,
+                @PortalID = @LocalPortalID,
+                @CreatedByUserId = @LocalCreatedByUserId
+
+
+            FETCH NEXT FROM Locales_Cursor
+            INTO @PortalLocale
+        END
+
+    CLOSE Locales_Cursor
+    DEALLOCATE Locales_Cursor
+    
+    EXECUTE {databaseOwner}[{objectQualifier}Apollo_TabLocalization_UpdateTabPaths] @TabId = NULL,
+        @PortalId = NULL
+GO
+/****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetTabsToRedirect]   ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetTabsToRedirect]
+    @Locale NVARCHAR(15) ,
+    @PortalID INT ,
+    @TabId INT
+AS 
+    BEGIN
+-- SELECT all tabs, but NOT the current tab (passed in @TabId), AND
+-- NOT tabs that are already redirecting to somewhere else (in order to prevent redir chaining)
+
+        SELECT  TLT.*
+        FROM    {databaseOwner}vw_{objectQualifier}Apollo_TabLocalization_Tabs AS TLT
+                INNER JOIN {databaseOwner}{objectQualifier}Tabs T ON TLT.Tabid = T.Tabid
+        WHERE   ( Locale = @Locale )
+                AND ( TLT.portalID = @PortalID )
+                AND ( NOT EXISTS ( SELECT   ItemId
+                                   FROM     {databaseOwner}{objectQualifier}Apollo_TabLocalization_Redirects
+                                            AS TR
+                                   WHERE    ( TLT.TabID = SrcTabId )
+                                            AND ( TR.SrcLang = @Locale ) )
+                    )
+        ORDER BY T.TabPath
+    END
+GO
