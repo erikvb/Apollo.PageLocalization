@@ -299,9 +299,7 @@
     <Content Include="PageLocalization.ascx">
       <SubType>Form</SubType>
     </Content>
-    <None Include="Apollo.PageLocalization.dnn">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Apollo.PageLocalization.dnn" />
     <None Include="Providers\DataProviders\SqlDataProvider\05.00.09.SqlDataProvider" />
     <None Include="Providers\DataProviders\SqlDataProvider\05.01.00.SqlDataProvider" />
     <None Include="Providers\DataProviders\SqlDataProvider\05.01.02.SqlDataProvider" />

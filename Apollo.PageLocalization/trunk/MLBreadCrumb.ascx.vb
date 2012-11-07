@@ -172,7 +172,7 @@ Namespace Apollo.DNN.SkinObjects
                 If intRootLevel = -1 Then
                     strBreadCrumbs += _
                         String.Format(Localization.GetString("Root", Localization.GetResourceFile(Me, MyFileName)), _
-                                       GetPortalDomainName(PortalSettings.PortalAlias.HTTPAlias, Request), strCssClass)
+                                       GetPortalDomainName(PortalSettings.PortalAlias.HTTPAlias, Request, True), strCssClass)
                     intRootLevel = 0
                 End If
 

@@ -113,6 +113,7 @@ Namespace Apollo.DNN.Modules.PageLocalization
         Private Sub doUpdate()
             Dim objSecurity As New PortalSecurity
 
+
             Try
                 If ItemId <> -1 Then
 
@@ -247,8 +248,12 @@ Namespace Apollo.DNN.Modules.PageLocalization
                             PageLocalizationController.FillDefaults(PortalId, UserId)
                             InitializeRTV()
                             cmdUpdate.ToolTip = Localization.GetString("cmdUpdate.Tooltip", LocalResourceFile)
+                            cboEditLanguage.PortalId = PortalId
                             cboEditLanguage.LanguagesListType = LanguagesListType.Enabled
                             cboEditLanguage.DataBind()
+                            cboEditLanguage.SetLanguage(localLocale)
+
+
                             'Localization.LoadCultureDropDownList(cboEditLanguage, CultureDropDownTypes.NativeName, _
                             '                                      localLocale)
 
@@ -271,6 +276,7 @@ Namespace Apollo.DNN.Modules.PageLocalization
             Handles cboEditLanguage.ItemChanged
             doUpdate()
             localLocale = CType(sender, DotNetNuke.Web.UI.WebControls.DnnLanguageComboBox).SelectedValue
+
             PageLocalizationController.FillDefaults(PortalId, UserId)
             ShowTabInfo(Integer.Parse(TV.SelectedValue))
         End Sub
@@ -304,6 +310,7 @@ Namespace Apollo.DNN.Modules.PageLocalization
 
         Private Sub ShowTabInfo(ByVal tabId As Integer)
             Dim tabInfo As LocalizedTabInfo = PageLocalizationController.Get(tabId, localLocale)
+
             If tabInfo IsNot Nothing Then
                 txtTabName.Text = tabInfo.TabName
                 txtKeyWords.Text = tabInfo.KeyWords
