@@ -1,4 +1,4 @@
-﻿/******* update table *****/
+/******* update table *****/
 
 DECLARE @objectid BIGINT
 
@@ -19,42 +19,42 @@ GO
 
 /****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationAdd]  ******/
 IF EXISTS ( SELECT  *
-            FROM    {databaseOwner}sysobjects
+            FROM    dbo.sysobjects
             WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationAdd]')
                     AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
     DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationAdd]
 GO
 /****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdate]  ******/
 IF EXISTS ( SELECT  *
-            FROM    {databaseOwner}sysobjects
+            FROM    dbo.sysobjects
             WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdate]')
                     AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
     DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdate]
 GO
 /****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale]  ******/
 IF EXISTS ( SELECT  *
-            FROM    {databaseOwner}sysobjects
+            FROM    dbo.sysobjects
             WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale]')
                     AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
     DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateByTabidAndLocale]
 GO
 /****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateOrAdd]  ******/
 IF EXISTS ( SELECT  *
-            FROM    {databaseOwner}sysobjects
+            FROM    dbo.sysobjects
             WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateOrAdd]')
                     AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
     DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationUpdateOrAdd]
 GO
 /****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetTabsToRedirect]  ******/
 IF EXISTS ( SELECT  *
-            FROM    {databaseOwner}sysobjects
+            FROM    dbo.sysobjects
             WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetTabsToRedirect]')
                     AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
     DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationGetTabsToRedirect]
 GO
 /****** Object:  StoredProcedure {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]  ******/
 IF EXISTS ( SELECT  *
-            FROM    {databaseOwner}sysobjects
+            FROM    dbo.sysobjects
             WHERE   id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]')
                     AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
     DROP PROCEDURE {databaseOwner}[{objectQualifier}Apollo_TabLocalizationFillDefaults]

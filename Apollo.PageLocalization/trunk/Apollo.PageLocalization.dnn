@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
     <packages>
-        <package name="PageLocalization" type="Module" version="06.00.00">
+        <package name="PageLocalization" type="Module" version="06.01.00">
             <friendlyName>PageLocalization</friendlyName>
             <description>This admin module creates a possibility to localize tab/page names </description>
             <owner>
@@ -57,10 +57,15 @@
                         <name>06.00.00.SqlDataProvider</name>
                         <version>06.00.00</version>
                       </script>
+                      <script type="Install">
+                        <path>Providers\DataProviders\SqlDataProvider</path>
+                        <name>06.01.00.SqlDataProvider</name>
+                        <version>06.01.00</version>
+                      </script>
                       <script type="UnInstall">
                             <path>Providers\DataProviders\SqlDataProvider</path>
                             <name>Uninstall.SqlDataProvider</name>
-                            <version>06.00.00</version>
+                            <version>06.01.00</version>
                         </script>
                     </scripts>
                 </component>

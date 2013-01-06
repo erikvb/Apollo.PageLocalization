@@ -1,4 +1,4 @@
-﻿/************************************************************/
+/************************************************************/
 /*****              SQLDataProvider                     *****/
 /*****              PageLocalization                    *****/
 /*****                                                  *****/
@@ -41,7 +41,7 @@ GO
 
 /****** Object:  View {databaseOwner}[vw_{objectQualifier}Apollo_TabLocalization_Tabs]  ******/
 IF EXISTS ( SELECT  *
-            FROM    {databaseOwner}sysobjects
+            FROM    dbo.sysobjects
             WHERE   id = OBJECT_ID(N'[vw_{objectQualifier}Apollo_TabLocalization_Tabs]')
                     AND OBJECTPROPERTY(id, N'IsView') = 1 ) 
     DROP VIEW [vw_{objectQualifier}Apollo_TabLocalization_Tabs]
